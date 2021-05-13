@@ -479,7 +479,7 @@ module.exports = typeof window == 'object';
 
 /***/ }),
 
-/***/ 8334:
+/***/ 6833:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var userAgent = __webpack_require__(8113);
@@ -1115,7 +1115,7 @@ module.exports = {};
 var global = __webpack_require__(7854);
 var getOwnPropertyDescriptor = __webpack_require__(1236).f;
 var macrotask = __webpack_require__(261).set;
-var IS_IOS = __webpack_require__(8334);
+var IS_IOS = __webpack_require__(6833);
 var IS_WEBOS_WEBKIT = __webpack_require__(1036);
 var IS_NODE = __webpack_require__(5268);
 
@@ -1881,7 +1881,7 @@ var fails = __webpack_require__(7293);
 var bind = __webpack_require__(9974);
 var html = __webpack_require__(490);
 var createElement = __webpack_require__(317);
-var IS_IOS = __webpack_require__(8334);
+var IS_IOS = __webpack_require__(6833);
 var IS_NODE = __webpack_require__(5268);
 
 var location = global.location;

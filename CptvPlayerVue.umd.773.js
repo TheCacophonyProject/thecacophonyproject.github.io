@@ -1,4 +1,4 @@
-((typeof self !== 'undefined' ? self : this)["webpackChunkCptvPlayerVue"] = (typeof self !== 'undefined' ? self : this)["webpackChunkCptvPlayerVue"] || []).push([[818],{
+((typeof self !== 'undefined' ? self : this)["webpackChunkCptvPlayerVue"] = (typeof self !== 'undefined' ? self : this)["webpackChunkCptvPlayerVue"] || []).push([[773],{
 
 /***/ 4019:
 /***/ ((module) => {
@@ -3919,6 +3919,8 @@ try {
 /* harmony export */   "Z": () => (/* binding */ _asyncToGenerator)
 /* harmony export */ });
 /* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1539);
+/* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8674);
+
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
@@ -4086,4 +4088,4 @@ function _objectSpread2(target) {
 /***/ })
 
 }]);
-//# sourceMappingURL=CptvPlayerVue.umd.818.js.map
+//# sourceMappingURL=CptvPlayerVue.umd.773.js.map

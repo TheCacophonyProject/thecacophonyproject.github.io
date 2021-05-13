@@ -256,24 +256,25 @@ var CptvDecoderInterface = /*#__PURE__*/function () {
 
               case 3:
                 this.locked = true;
+                this.prevFrameHeader = null;
 
                 if (initedWasm) {
-                  _context.next = 11;
+                  _context.next = 12;
                   break;
                 }
 
-                _context.next = 7;
+                _context.next = 8;
                 return __webpack_require__.e(/* import() */ 860).then(__webpack_require__.bind(__webpack_require__, 8860));
 
-              case 7:
+              case 8:
                 CptvPlayerContext = _context.sent.CptvPlayerContext;
                 initedWasm = true;
-                _context.next = 17;
+                _context.next = 18;
                 break;
 
-              case 11:
+              case 12:
                 if (!(initedWasm && this.inited)) {
-                  _context.next = 17;
+                  _context.next = 18;
                   break;
                 }
 
@@ -281,26 +282,26 @@ var CptvDecoderInterface = /*#__PURE__*/function () {
                 _context.t0 = this.reader;
 
                 if (!_context.t0) {
-                  _context.next = 17;
+                  _context.next = 18;
                   break;
                 }
 
-                _context.next = 17;
+                _context.next = 18;
                 return this.reader.cancel();
 
-              case 17:
-                _context.prev = 17; // Use this expired JWT token to test that failure case (usually when a page has been open too long)
+              case 18:
+                _context.prev = 18; // Use this expired JWT token to test that failure case (usually when a page has been open too long)
                 // const oldJWT = "https://api.cacophony.org.nz/api/v1/signedUrl?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfdHlwZSI6ImZpbGVEb3dubG9hZCIsImtleSI6InJhdy8yMDIxLzA0LzE1LzQ3MGU2YjY1LWZkOTgtNDk4Ny1iNWQ3LWQyN2MwOWIxODFhYSIsImZpbGVuYW1lIjoiMjAyMTA0MTUtMTE0MjE2LmNwdHYiLCJtaW1lVHlwZSI6ImFwcGxpY2F0aW9uL3gtY3B0diIsImlhdCI6MTYxODQ2MjUwNiwiZXhwIjoxNjE4NDYzMTA2fQ.p3RAOX7Ns52JqHWTMM5Se-Fn-UCyRtX2tveaGrRmiwo";
 
                 this.consumed = false;
-                _context.next = 21;
+                _context.next = 22;
                 return fetch(url);
 
-              case 21:
+              case 22:
                 this.response = _context.sent;
 
                 if (!(this.response.status === 200)) {
-                  _context.next = 35;
+                  _context.next = 36;
                   break;
                 }
 
@@ -311,51 +312,51 @@ var CptvDecoderInterface = /*#__PURE__*/function () {
                 }
 
                 this.expectedSize = size;
-                _context.next = 28;
+                _context.next = 29;
                 return CptvPlayerContext.newWithStream(this.reader);
 
-              case 28:
+              case 29:
                 this.playerContext = _context.sent;
                 unlocker.unlock();
                 this.inited = true;
                 this.locked = false;
                 return _context.abrupt("return", true);
 
-              case 35:
+              case 36:
                 this.locked = false;
-                _context.prev = 36;
-                _context.next = 39;
+                _context.prev = 37;
+                _context.next = 40;
                 return this.response.json();
 
-              case 39:
+              case 40:
                 _r = _context.sent;
                 return _context.abrupt("return", _r.messages && _r.messages.pop() || _r.message || "Unknown error");
 
-              case 43:
-                _context.prev = 43;
-                _context.t1 = _context["catch"](36);
-                _context.next = 47;
+              case 44:
+                _context.prev = 44;
+                _context.t1 = _context["catch"](37);
+                _context.next = 48;
                 return r.text();
 
-              case 47:
+              case 48:
                 return _context.abrupt("return", _context.sent);
 
-              case 48:
-                _context.next = 54;
+              case 49:
+                _context.next = 55;
                 break;
 
-              case 50:
-                _context.prev = 50;
-                _context.t2 = _context["catch"](17);
+              case 51:
+                _context.prev = 51;
+                _context.t2 = _context["catch"](18);
                 this.locked = false;
                 return _context.abrupt("return", "Failed to load CPTV url ".concat(url, ", ").concat(_context.t2));
 
-              case 54:
+              case 55:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[17, 50], [36, 43]]);
+        }, _callee, this, [[18, 51], [37, 44]]);
       }));
 
       function initWithCptvUrlAndSize(_x, _x2) {
@@ -368,8 +369,7 @@ var CptvDecoderInterface = /*#__PURE__*/function () {
     key: "initWithCptvFile",
     value: function () {
       var _initWithCptvFile = (0,asyncToGenerator/* default */.Z)( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(filePath) {
-        var file, require, path, wasm;
-
+        var file;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
@@ -379,16 +379,9 @@ var CptvDecoderInterface = /*#__PURE__*/function () {
 
               case 2:
                 file = _context2.sent;
-                require = (0,module_ignored_.createRequire)("file:///Users/jon/Dev/Cacophony/cptv-rs/decoder.js");
-                path = require.resolve("./pkg-node/index_bg.wasm");
-                _context2.next = 7;
-                return promises_ignored_.readFile(path);
+                return _context2.abrupt("return", this.initWithFileBytes(file, filePath));
 
-              case 7:
-                wasm = _context2.sent;
-                return _context2.abrupt("return", this.initWithFileBytes(file, filePath, wasm));
-
-              case 9:
+              case 4:
               case "end":
                 return _context2.stop();
             }
@@ -409,9 +402,7 @@ var CptvDecoderInterface = /*#__PURE__*/function () {
         var filePath,
             wasm,
             unlocker,
-            require,
             _args3 = arguments;
-
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
@@ -424,42 +415,42 @@ var CptvDecoderInterface = /*#__PURE__*/function () {
                 return this.lockIsUncontended(unlocker);
 
               case 5:
+                this.prevFrameHeader = null;
                 this.locked = true;
 
                 if (initedWasm) {
-                  _context3.next = 18;
+                  _context3.next = 20;
                   break;
                 }
 
                 if (!module_ignored_.createRequire) {
-                  _context3.next = 12;
+                  _context3.next = 14;
                   break;
                 }
 
-                require = (0,module_ignored_.createRequire)("file:///Users/jon/Dev/Cacophony/cptv-rs/decoder.js");
+                _context3.next = 11;
+                return __webpack_require__.e(/* import() */ 626).then(__webpack_require__.t.bind(__webpack_require__, 6626, 19));
 
-                if (require) {
-                  CptvPlayerContext = require("./pkg-node").CptvPlayerContext;
-                }
-
-                _context3.next = 15;
+              case 11:
+                CptvPlayerContext = _context3.sent.CptvPlayerContext;
+                _context3.next = 17;
                 break;
-
-              case 12:
-                _context3.next = 14;
-                return __webpack_require__.e(/* import() */ 860).then(__webpack_require__.bind(__webpack_require__, 8860));
 
               case 14:
+                _context3.next = 16;
+                return __webpack_require__.e(/* import() */ 860).then(__webpack_require__.bind(__webpack_require__, 8860));
+
+              case 16:
                 CptvPlayerContext = _context3.sent.CptvPlayerContext;
 
-              case 15:
+              case 17:
                 initedWasm = true;
-                _context3.next = 24;
+                _context3.next = 26;
                 break;
 
-              case 18:
+              case 20:
                 if (!(initedWasm && this.inited)) {
-                  _context3.next = 24;
+                  _context3.next = 26;
                   break;
                 }
 
@@ -467,40 +458,40 @@ var CptvDecoderInterface = /*#__PURE__*/function () {
                 _context3.t0 = this.reader;
 
                 if (!_context3.t0) {
-                  _context3.next = 24;
+                  _context3.next = 26;
                   break;
                 }
 
-                _context3.next = 24;
+                _context3.next = 26;
                 return this.reader.cancel();
 
-              case 24:
+              case 26:
                 this.consumed = false;
                 this.reader = new FakeReader(fileBytes, 100000);
                 this.expectedSize = fileBytes.length;
-                _context3.prev = 27;
-                _context3.next = 30;
+                _context3.prev = 29;
+                _context3.next = 32;
                 return CptvPlayerContext.newWithStream(this.reader);
 
-              case 30:
+              case 32:
                 this.playerContext = _context3.sent;
                 unlocker.unlock();
                 this.inited = true;
                 this.locked = false;
                 return _context3.abrupt("return", true);
 
-              case 37:
-                _context3.prev = 37;
-                _context3.t1 = _context3["catch"](27);
+              case 39:
+                _context3.prev = 39;
+                _context3.t1 = _context3["catch"](29);
                 this.locked = false;
                 return _context3.abrupt("return", "Failed to load CPTV file ".concat(filePath, ", ").concat(_context3.t1));
 
-              case 41:
+              case 43:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, this, [[27, 37]]);
+        }, _callee3, this, [[29, 39]]);
       }));
 
       function initWithFileBytes(_x4) {
@@ -513,7 +504,7 @@ var CptvDecoderInterface = /*#__PURE__*/function () {
     key: "fetchNextFrame",
     value: function () {
       var _fetchNextFrame = (0,asyncToGenerator/* default */.Z)( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
-        var unlocker, frameData, frameHeader;
+        var unlocker, frameData, frameHeader, sameFrameAsPrev;
         return regeneratorRuntime.wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
@@ -542,41 +533,73 @@ var CptvDecoderInterface = /*#__PURE__*/function () {
                 this.locked = true;
 
                 if (!(this.playerContext && this.playerContext.ptr)) {
-                  _context4.next = 12;
+                  _context4.next = 21;
                   break;
                 }
 
-                _context4.next = 11;
+                _context4.prev = 9;
+                _context4.next = 12;
                 return CptvPlayerContext.fetchNextFrame(this.playerContext);
 
-              case 11:
-                this.playerContext = _context4.sent;
-
               case 12:
+                this.playerContext = _context4.sent;
+                _context4.next = 19;
+                break;
+
+              case 15:
+                _context4.prev = 15;
+                _context4.t0 = _context4["catch"](9);
+                this.streamError = _context4.t0;
+                return _context4.abrupt("return", null);
+
+              case 19:
+                _context4.next = 22;
+                break;
+
+              case 21:
+                console.warn("Fetch next failed");
+
+              case 22:
                 unlocker.unlock();
                 this.locked = false;
                 frameData = this.playerContext.getNextFrame();
+                frameHeader = this.playerContext.getFrameHeader();
+                sameFrameAsPrev = frameHeader && this.prevFrameHeader && frameHeader.timeOnMs === this.prevFrameHeader.timeOnMs;
+
+                if (!(sameFrameAsPrev && this.getTotalFrames() === null)) {
+                  _context4.next = 32;
+                  break;
+                }
+
+                this.prevFrameHeader = frameHeader;
+                _context4.next = 31;
+                return this.fetchNextFrame();
+
+              case 31:
+                return _context4.abrupt("return", _context4.sent);
+
+              case 32:
+                this.prevFrameHeader = frameHeader;
 
                 if (!(frameData.length === 0)) {
-                  _context4.next = 17;
+                  _context4.next = 35;
                   break;
                 }
 
                 return _context4.abrupt("return", null);
 
-              case 17:
-                frameHeader = this.playerContext.getFrameHeader();
+              case 35:
                 return _context4.abrupt("return", {
                   data: new Uint16Array(frameData),
                   meta: frameHeader
                 });
 
-              case 19:
+              case 36:
               case "end":
                 return _context4.stop();
             }
           }
-        }, _callee4, this);
+        }, _callee4, this, [[9, 15]]);
       }));
 
       function fetchNextFrame() {
@@ -663,7 +686,8 @@ var CptvDecoderInterface = /*#__PURE__*/function () {
                 totalFrameCount = _context6.sent;
                 duration = 1 / header.fps * totalFrameCount;
                 return _context6.abrupt("return", (0,objectSpread2/* default */.Z)((0,objectSpread2/* default */.Z)({}, header), {}, {
-                  duration: duration
+                  duration: duration,
+                  totalFrames: totalFrameCount
                 }));
 
               case 8:
@@ -834,6 +858,10 @@ var CptvDecoderInterface = /*#__PURE__*/function () {
   }, {
     key: "getTotalFrames",
     value: function getTotalFrames() {
+      if (this.streamError) {
+        return 1;
+      }
+
       if (!this.locked && this.inited && this.playerContext.ptr && this.playerContext.streamComplete()) {
         return this.playerContext.totalFrames();
       }
@@ -850,6 +878,30 @@ var CptvDecoderInterface = /*#__PURE__*/function () {
 
       return this.playerContext.bytesLoaded() / this.expectedSize;
     }
+  }, {
+    key: "hasStreamError",
+    value: function () {
+      var _hasStreamError = (0,asyncToGenerator/* default */.Z)( /*#__PURE__*/regeneratorRuntime.mark(function _callee11() {
+        return regeneratorRuntime.wrap(function _callee11$(_context11) {
+          while (1) {
+            switch (_context11.prev = _context11.next) {
+              case 0:
+                return _context11.abrupt("return", this.streamError !== undefined);
+
+              case 1:
+              case "end":
+                return _context11.stop();
+            }
+          }
+        }, _callee11, this);
+      }));
+
+      function hasStreamError() {
+        return _hasStreamError.apply(this, arguments);
+      }
+
+      return hasStreamError;
+    }()
   }]);
 
   return CptvDecoderInterface;
@@ -868,7 +920,7 @@ if (context) {
   var player = new CptvDecoderInterface();
   context.addEventListener("message", /*#__PURE__*/function () {
     var _ref2 = (0,asyncToGenerator/* default */.Z)( /*#__PURE__*/regeneratorRuntime.mark(function _callee(_ref) {
-      var data, result, _result, _result2, _result3, header, _header, frame, totalFrames, progress, _header2;
+      var data, result, _result, _result2, _result3, header, _header, frame, totalFrames, progress, _header2, hasError;
 
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
@@ -876,7 +928,7 @@ if (context) {
             case 0:
               data = _ref.data;
               _context.t0 = data.type;
-              _context.next = _context.t0 === "initWithUrl" ? 4 : _context.t0 === "initWithUrlAndSize" ? 9 : _context.t0 === "initWithPath" ? 14 : _context.t0 === "initWithLocalCptvFile" ? 19 : _context.t0 === "getFileMetadata" ? 24 : _context.t0 === "getStreamMetadata" ? 29 : _context.t0 === "getNextFrame" ? 34 : _context.t0 === "getTotalFrames" ? 39 : _context.t0 === "getLoadProgress" ? 42 : _context.t0 === "getHeader" ? 45 : 50;
+              _context.next = _context.t0 === "initWithUrl" ? 4 : _context.t0 === "initWithUrlAndSize" ? 9 : _context.t0 === "initWithPath" ? 14 : _context.t0 === "initWithLocalCptvFile" ? 19 : _context.t0 === "getFileMetadata" ? 24 : _context.t0 === "getStreamMetadata" ? 29 : _context.t0 === "getNextFrame" ? 34 : _context.t0 === "getTotalFrames" ? 39 : _context.t0 === "getLoadProgress" ? 42 : _context.t0 === "getHeader" ? 45 : _context.t0 === "hasStreamError" ? 50 : 55;
               break;
 
             case 4:
@@ -889,7 +941,7 @@ if (context) {
                 type: data.type,
                 data: result
               });
-              return _context.abrupt("break", 52);
+              return _context.abrupt("break", 57);
 
             case 9:
               _context.next = 11;
@@ -901,7 +953,7 @@ if (context) {
                 type: data.type,
                 data: _result
               });
-              return _context.abrupt("break", 52);
+              return _context.abrupt("break", 57);
 
             case 14:
               _context.next = 16;
@@ -913,7 +965,7 @@ if (context) {
                 type: data.type,
                 data: _result2
               });
-              return _context.abrupt("break", 52);
+              return _context.abrupt("break", 57);
 
             case 19:
               _context.next = 21;
@@ -925,7 +977,7 @@ if (context) {
                 type: data.type,
                 data: _result3
               });
-              return _context.abrupt("break", 52);
+              return _context.abrupt("break", 57);
 
             case 24:
               _context.next = 26;
@@ -937,7 +989,7 @@ if (context) {
                 type: data.type,
                 data: header
               });
-              return _context.abrupt("break", 52);
+              return _context.abrupt("break", 57);
 
             case 29:
               _context.next = 31;
@@ -949,7 +1001,7 @@ if (context) {
                 type: data.type,
                 data: _header
               });
-              return _context.abrupt("break", 52);
+              return _context.abrupt("break", 57);
 
             case 34:
               _context.next = 36;
@@ -961,7 +1013,7 @@ if (context) {
                 type: data.type,
                 data: frame
               });
-              return _context.abrupt("break", 52);
+              return _context.abrupt("break", 57);
 
             case 39:
               totalFrames = player.getTotalFrames();
@@ -969,7 +1021,7 @@ if (context) {
                 type: data.type,
                 data: totalFrames
               });
-              return _context.abrupt("break", 52);
+              return _context.abrupt("break", 57);
 
             case 42:
               progress = player.getLoadProgress();
@@ -977,7 +1029,7 @@ if (context) {
                 type: data.type,
                 data: progress
               });
-              return _context.abrupt("break", 52);
+              return _context.abrupt("break", 57);
 
             case 45:
               _context.next = 47;
@@ -989,13 +1041,25 @@ if (context) {
                 type: data.type,
                 data: _header2
               });
-              return _context.abrupt("break", 52);
+              return _context.abrupt("break", 57);
 
             case 50:
+              _context.next = 52;
+              return player.hasStreamError();
+
+            case 52:
+              hasError = _context.sent;
+              context.postMessage({
+                type: data.type,
+                data: hasError
+              });
+              return _context.abrupt("break", 57);
+
+            case 55:
               context.postMessage(data);
               return _context.abrupt("return");
 
-            case 52:
+            case 57:
             case "end":
               return _context.stop();
           }
