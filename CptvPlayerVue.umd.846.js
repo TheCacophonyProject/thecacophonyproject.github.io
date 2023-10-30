@@ -7,7 +7,7 @@
 		exports["CptvPlayerVue"] = factory();
 	else
 		root["CptvPlayerVue"] = factory();
-})((typeof self !== 'undefined' ? self : this), function() {
+})((typeof self !== 'undefined' ? self : this), () => {
 return /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
@@ -128,7 +128,7 @@ var inspectSource = __webpack_require__(2788);
 var iterate = __webpack_require__(408);
 var checkCorrectnessOfIteration = __webpack_require__(7072);
 var speciesConstructor = __webpack_require__(6707);
-var task = __webpack_require__(261).set;
+var task = (__webpack_require__(261).set);
 var microtask = __webpack_require__(5948);
 var promiseResolve = __webpack_require__(9478);
 var hostReportErrors = __webpack_require__(842);
@@ -167,7 +167,8 @@ var SUBCLASSING = false;
 var Internal, OwnPromiseCapability, PromiseWrapper, nativeThen;
 
 var FORCED = isForced(PROMISE, function () {
-  var GLOBAL_CORE_JS_PROMISE = inspectSource(PromiseConstructor) !== String(PromiseConstructor);
+  var PROMISE_CONSTRUCTOR_SOURCE = inspectSource(PromiseConstructor);
+  var GLOBAL_CORE_JS_PROMISE = PROMISE_CONSTRUCTOR_SOURCE !== String(PromiseConstructor);
   // V8 6.6 (Node 10 and Chrome 66) have a bug with resolving custom thenables
   // https://bugs.chromium.org/p/chromium/issues/detail?id=830565
   // We can't detect it synchronously, so just check versions
@@ -177,7 +178,7 @@ var FORCED = isForced(PROMISE, function () {
   // We can't use @@species feature detection in V8 since it causes
   // deoptimization and performance degradation
   // https://github.com/zloirock/core-js/issues/679
-  if (V8_VERSION >= 51 && /native code/.test(PromiseConstructor)) return false;
+  if (V8_VERSION >= 51 && /native code/.test(PROMISE_CONSTRUCTOR_SOURCE)) return false;
   // Detect correctness of subclassing with @@species support
   var promise = new PromiseConstructor(function (resolve) { resolve(1); });
   var FakePromise = function (exec) {
@@ -511,7 +512,7 @@ $({ target: PROMISE, stat: true, forced: INCORRECT_ITERATION }, {
 
 "use strict";
 
-var charAt = __webpack_require__(8710).charAt;
+var charAt = (__webpack_require__(8710).charAt);
 var InternalStateModule = __webpack_require__(9909);
 var defineIterator = __webpack_require__(654);
 
@@ -1382,7 +1383,7 @@ function _asyncToGenerator(fn) {
 }
 
 module.exports = _asyncToGenerator;
-module.exports.default = module.exports, module.exports.__esModule = true;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
 
@@ -1401,7 +1402,7 @@ __webpack_require__(3948);
 
 __webpack_require__(5666);
 
-var _asyncToGenerator = __webpack_require__(9959).default;
+var _asyncToGenerator = (__webpack_require__(9959)["default"]);
 
 __webpack_require__(5666);
 
@@ -1556,7 +1557,8 @@ onmessage = /*#__PURE__*/function () {
 /******/ 				}
 /******/ 				if(fulfilled) {
 /******/ 					deferred.splice(i--, 1)
-/******/ 					result = fn();
+/******/ 					var r = fn();
+/******/ 					if (r !== undefined) result = r;
 /******/ 				}
 /******/ 			}
 /******/ 			return result;
@@ -1722,7 +1724,7 @@ onmessage = /*#__PURE__*/function () {
 /******/ 	
 /******/ 	// run startup
 /******/ 	var __webpack_exports__ = __webpack_require__.x();
-/******/ 	__webpack_exports__ = __webpack_exports__.default;
+/******/ 	__webpack_exports__ = __webpack_exports__["default"];
 /******/ 	
 /******/ 	return __webpack_exports__;
 /******/ })()
